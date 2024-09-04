@@ -5,6 +5,11 @@
   --accent: #E2BBE9;
 }
 
+Button {
+  box-shadow: 0px 0px 0p;
+  /* elevation: 0; */
+}
+
 .leaflet-container {
   width: 100vw;
   height: 100vh;
@@ -15,8 +20,8 @@
 .instructions {
   background-color: var(--secondary);
   color: white;
-  padding-top: 1%;
-  padding-bottom: 1%;
+  padding-top: 0.8%;
+  padding-bottom: 0.75%;
   position: relative;
   text-align: center;
 }
@@ -30,6 +35,18 @@
   background-color: var(--tertiary);
 }
 
+.button-menu {
+  margin-bottom: 50px;
+}
+
+.icon-image {
+  height: 100;
+  width: 100px; 
+  @media screen and (max-device-width: 540px) {
+    width: 50px; 
+  }
+}
+
 .active-color {
   background-color: var(--accent);
 }
@@ -38,6 +55,13 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
   a {
     color: rgb(9, 12, 99); 
     background-color: var(--accent);
+    width: 100px;
+    height: 50px;
+    border-color: var(--primary);
+
+    @media screen and (max-device-width: 540px) {
+      width: 50px; 
+    }
   }
 
   *.leaflet-disabled {

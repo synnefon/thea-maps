@@ -35,7 +35,6 @@ export function deleteMarker(marker, tableName='althea_map_token_data') {
 
 export function fetchMarkers(tableName='althea_map_token_data') {
     const ddb = new AWS.DynamoDB.DocumentClient();
-    console.log(process.env.ACCESS_KEY_ID)
 
     const params = {
         TableName: tableName
