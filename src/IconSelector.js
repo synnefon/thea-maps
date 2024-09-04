@@ -41,7 +41,7 @@ export function IconSelector({handleSelectedColor}) {
                 )
             })}
             {isMobile && <h2 className='instructions mobile'> DOUBLE-CLICK TO ADD A MARKER</h2>}
-            {isMobile && <div><br/><br/><br/><br/></div>}
+            {isMobile && <div><br/><br/><br/><br/><br/></div>}
         </Control>
     )
 }
