@@ -3,30 +3,49 @@ import red from './assets/red-marker.svg'
 import yellow from './assets/yellow-marker.svg'
 import purple from './assets/purple-marker.svg'
 
+import smile from './assets/smile.svg'
+import person from './assets/person-half.svg'
+import alert from './assets/alert.svg'
+import house from './assets/house.svg'
+import money from './assets/money-bag.svg'
+import flag from './assets/flag.svg'
 
-export const Colors = Object.freeze({
+
+export const Icons = Object.freeze({
     RED:   "red",
     YELLOW:  "yellow",
-    PURPLE: "purple"
+    PURPLE: "purple",
+    SMILE: "smile",
+    PERSON: "person",
+    ALERT: "alert",
+    HOUSE: "house",
+    MONEY: "money",
+    FLAG: "flag",
 });
 
-export const getColorSvg = (color) => {
+export const getIconSvg = (icon) => {
     return  {
-        [Colors.RED]: red,
-        [Colors.YELLOW]: yellow,
-        [Colors.PURPLE]: purple
-    }[color]
+        [Icons.RED]: red,
+        [Icons.YELLOW]: yellow,
+        [Icons.PURPLE]: purple,
+        [Icons.SMILE]: smile,
+        [Icons.PERSON]: person,
+        [Icons.ALERT]: alert,
+        [Icons.HOUSE]: house,
+        [Icons.MONEY]: money,
+        [Icons.FLAG]: flag
+    }[icon]
 }
 
-export const createIcon = (color = Colors.RED) => {
-    const colorsvg = getColorSvg(color)
+export const createIcon = (icon = Icons.RED) => {
+    const iconvg = getIconSvg(icon)
 
     return new L.Icon({
-        iconUrl: colorsvg,
-        iconRetinaUrl: colorsvg,
+        iconUrl: iconvg,
+        iconRetinaUrl: iconvg,
         popupAnchor:  [0, 0],
-        iconAnchor: [15, 40],
-        iconSize: [32,45],     
+        iconAnchor: [20, 23],
+        iconSize: [35,45],     
     })
 }
 

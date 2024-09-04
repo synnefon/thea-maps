@@ -4,18 +4,18 @@ import Button from 'react-bootstrap/Button';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { v4 as uuidv4 } from 'uuid';
 import { upsertMarker, fetchMarkers, deleteMarker } from './DatabaseHandler';
-import { createIcon, Colors } from './MapIcon';
+import { createIcon } from './MapIcon';
 import { IconSelector } from './IconSelector';
 
 import './style.css';
 
 
 class MapMarker {
-    constructor(id, position, description, color) {
+    constructor(id, position, description, icon) {
         this.id = id
         this.position = position
         this.description = description
-        this.color = color
+        this.icon = icon
     }
 }
 
@@ -29,7 +29,7 @@ class MapMarker {
 
 export function Map() {
     const [markers, setMarkers] = useState([])
-    const [activeColor, setActiveColor] = useState(Colors.RED)
+    const [activeIcon, setActiveIcon] = useState(null)
     // const [timerRunning, setTimerRunning] = useState(false)
     // const pauseTimer = () => setTimerRunning(false)
     // const startTimer = () => setTimerRunning(true);
@@ -37,7 +37,7 @@ export function Map() {
     const loadMarkersData = async () => {
         // console.log(document.querySelector('.leaflet-popup-content'))
         fetchMarkers().then((markersData) => {
-            setMarkers(markersData.Items.map((entry) => new MapMarker(entry.id, entry.position, entry.description, entry.color)))
+            setMarkers(markersData.Items.map((entry) => new MapMarker(entry.id, entry.position, entry.description, entry.icon)))
         })
     }
 
@@ -67,7 +67,7 @@ export function Map() {
                     //     console.log(e)
                     // }
                 }}
-                icon={createIcon(marker.color)}
+                icon={createIcon(marker.icon)}
             >
                 <Popup
                     onOpen={(e) => {
@@ -103,8 +103,10 @@ export function Map() {
     const LocationMarkers = () => {
         useMapEvents({
             dblclick(e) {
+                if (!activeIcon) return
+
                 const position = [e.latlng.lat, e.latlng.lng]
-                const newMarker = new MapMarker(uuidv4(), position, "", activeColor)
+                const newMarker = new MapMarker(uuidv4(), position, "", activeIcon)
                 setMarkers(markers.concat([newMarker]))
                 upsertMarker(newMarker)
             },
@@ -129,7 +131,7 @@ export function Map() {
                 autoPanOnFocus={false}
             >
                 <TileLayer url={'../althea/{z}/{x}/{y}.png'}/>
-                <IconSelector handleSelectedColor={(color) => setActiveColor(color)}/>
+                <IconSelector handleSelectedIcon={(icon) => setActiveIcon(icon)}/>
                 <LocationMarkers/>
             </MapContainer>
         </div>

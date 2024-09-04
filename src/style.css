@@ -5,11 +5,6 @@
   --accent: #E2BBE9;
 }
 
-Button {
-  box-shadow: 0px 0px 0p;
-  /* elevation: 0; */
-}
-
 .leaflet-container {
   width: 100vw;
   height: 100vh;
@@ -44,7 +39,7 @@ Button {
 .leaflet-control-container .leaflet-bottom.leaflet-left {
   @media (any-hover: hover) {
     background-color: var(--primary);
-    font-size: 94%;
+    /* font-size: 94%; */
   }
   padding-right: 15px;
 }
@@ -54,10 +49,10 @@ Button {
   width: 100px; 
   @media screen and (max-device-width: 540px) {
     width: 50px; 
-  }
+  };
 }
 
-.active-color {
+.active-icon {
   background-color: var(--accent);
 }
 

@@ -16,7 +16,7 @@ export function upsertMarker(marker, tableName='althea_map_token_data') {
             'id': marker.id,
             'description': marker.description,
             'position': marker.position,
-            'color': marker.color
+            'icon': marker.icon
         }
     }
     return ddb.put(params).promise()
