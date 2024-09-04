@@ -70,8 +70,6 @@ export function Map() {
                 icon={createIcon(marker.color)}
             >
                 <Popup
-                    closeOnClick={false}
-                    autoClose={false}
                     onOpen={(e) => {
                         console.log(e)
                         // pauseTimer()
