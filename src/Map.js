@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {isMobile} from 'react-device-detect';
 import Button from 'react-bootstrap/Button';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { v4 as uuidv4 } from 'uuid';
@@ -81,22 +82,28 @@ export function Map() {
     useEffect(() => {
         loadMarkersData()
     }, []);
+
+    const initialZoom = isMobile ? 1 : 3
+    const minZoom = isMobile ? 1 : 3
+    const maxZoom = isMobile ? 5 : 6
         
     return (
         <div>
             <MapContainer
                 center={[75, -95]} 
-                zoom={3}
+                zoom={initialZoom}
                 tap={true}
-                minZoom={3}
-                maxZoom={6}
+                minZoom={minZoom}
+                maxZoom={maxZoom}
                 doubleClickZoom={false}
                 style={{"textCenter": true}}
                 autoPanOnFocus={false}
             >
-                <h1 className='instructions'>
-                    DOUBLE-CLICK TO ADD A MARKER
-                </h1>
+                {
+                    isMobile ? 
+                        <h2 className='instructions mobile'> DOUBLE-CLICK TO ADD A MARKER</h2> :
+                        <h1 className='instructions'> DOUBLE-CLICK TO ADD A MARKER</h1>
+                }
                 <TileLayer 
                     url={'../althea/{z}/{x}/{y}.png'}/>
                 <LocationMarkers/>

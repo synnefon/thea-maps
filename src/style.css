@@ -14,12 +14,16 @@
 
 .instructions {
   background-color: var(--secondary);
-  /* color: var(--accent); */
   color: white;
   padding-top: 1%;
   padding-bottom: 1%;
   position: relative;
   text-align: center;
+}
+
+.instructions.mobile {
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 .marker-menu {
