@@ -1,0 +1,23 @@
+.leaflet-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(9, 12, 99);
+  text-align: center;
+}
+
+.instructions {
+  background-color: rgb(87, 90, 184);
+  padding-top: 1%;
+  padding-bottom: 1%;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+
+.marker-menu {
+  background-color: rgb(77, 108, 0);
+}
+
+.active-color {
+  background-color: rgb(175, 250, 0);
+}
