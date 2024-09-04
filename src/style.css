@@ -18,25 +18,35 @@ Button {
 }
 
 .instructions {
-  background-color: var(--secondary);
+  background-color: var(--primary);
   color: white;
-  padding-top: 0.8%;
-  padding-bottom: 0.75%;
   position: relative;
-  text-align: center;
+  text-align: left;
+  text-wrap: wrap;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .instructions.mobile {
-  padding-top: 5%;
-  padding-bottom: 5%;
+  width: 169px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
-.marker-menu {
+.marker-wrapper {
+  float: left;
+}
+
+.marker-button {
   background-color: var(--tertiary);
 }
 
-.button-menu {
-  margin-bottom: 50px;
+.leaflet-control-container .leaflet-bottom.leaflet-left {
+  @media (any-hover: hover) {
+    background-color: var(--primary);
+    font-size: 94%;
+  }
+  padding-right: 15px;
 }
 
 .icon-image {
@@ -58,6 +68,7 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
     width: 100px;
     height: 50px;
     border-color: var(--primary);
+    text-align: center;
 
     @media screen and (max-device-width: 540px) {
       width: 50px; 
@@ -65,7 +76,7 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
   }
 
   *.leaflet-disabled {
-    background-color: var(--tertiary);
+    background-color: rgb(133, 134, 159);
     color: rgb(9, 12, 99);
   }
  }

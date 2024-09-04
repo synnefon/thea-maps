@@ -11,31 +11,36 @@ export function IconSelector({handleSelectedColor}) {
     const buttonSize = isMobile ? 50 : 100
 
     return (
-        <Control position='bottomleft'>
+        <Control 
+            position='bottomleft'
+            className='marker-menu'
+        >
+            {!isMobile && <h2 className='instructions'> &nbsp;DOUBLE-CLICK TO ADD A MARKER</h2>}
             {[Colors.RED, Colors.YELLOW, Colors.PURPLE].map((color) => {
                 return (
-                    <div style = {{ 'width': `${buttonSize}px` }} key={color.toString()}>
-                    <Button 
-                        
+                    <div 
+                        className={`${isMobile ? '' : 'marker-wrapper'}`}
+                        style = {{ 'width': `${buttonSize}px` }}
                         key={color.toString()}
-                        className={`marker-menu ${selectedColor === color? 'active-color' : ''}`}
-                        onClick={() => {
-                            setSelectedColor(color)
-                            handleSelectedColor(color)
-                        }}
-                    > 
-                        <img 
-                            className='icon-image'
-                            src={getColorSvg(color)}
-                            // height={buttonSize}
-                            // width={buttonSize}
-                            alt={`${color} marker selector button`}
-                        />
-                    </Button> 
-                    <br/>
+                    >
+                        <Button 
+                            key={color.toString()}
+                            className={`marker-button ${selectedColor === color? 'active-color' : ''}`}
+                            onClick={() => {
+                                setSelectedColor(color)
+                                handleSelectedColor(color)
+                            }}
+                        > 
+                            <img 
+                                className='icon-image'
+                                src={getColorSvg(color)}
+                                alt={`${color} marker selector button`}
+                            />
+                        </Button> 
                     </div>
                 )
             })}
+            {isMobile && <h2 className='instructions mobile'> DOUBLE-CLICK TO ADD A MARKER</h2>}
             {isMobile && <br/>}
         </Control>
     )
