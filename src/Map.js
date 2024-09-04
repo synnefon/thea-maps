@@ -27,11 +27,6 @@ export function Map() {
         })
     }
 
-    useEffect(() => {
-        loadMarkersData()
-    }, []);
-
-
     const DrawableMarker = (marker) => {
         const handlePopupClose = () => upsertMarker(marker)
         const [description, setDescription] = useState(null)
@@ -82,6 +77,10 @@ export function Map() {
 
         return markers.map((marker, _) => DrawableMarker(marker))
     }
+
+    useEffect(() => {
+        loadMarkersData()
+    }, []);
         
     return (
         <div>
@@ -96,7 +95,7 @@ export function Map() {
                 autoPanOnFocus={false}
             >
                 <h1 className='instructions'>
-                    DOUBLE CLICK TO ADD A MARKER
+                    DOUBLE-CLICK TO ADD A MARKER
                 </h1>
                 <TileLayer 
                     url={'../althea/{z}/{x}/{y}.png'}/>

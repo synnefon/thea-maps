@@ -20,7 +20,12 @@ export function IconSelector({handleSelectedColor}) {
                             handleSelectedColor(color)
                         }}
                     > 
-                        <img src={getColorSvg(color)} height={100} width={100}/>
+                        <img 
+                            src={getColorSvg(color)}
+                            height={100}
+                            width={100}
+                            alt={`${color} marker selector button`}
+                        />
                     </Button> 
                 )
             })}
