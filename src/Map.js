@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {isMobile} from 'react-device-detect';
 import Button from 'react-bootstrap/Button';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
