@@ -1,23 +1,43 @@
+:root {
+  --primary: #5A639C;
+  --secondary: #7776B3;
+  --tertiary: #9B86BD;
+  --accent: #E2BBE9;
+}
+
 .leaflet-container {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(9, 12, 99);
+  background-color: var(--primary);
   text-align: center;
 }
 
 .instructions {
-  background-color: rgb(87, 90, 184);
+  background-color: var(--secondary);
+  /* color: var(--accent); */
+  color: white;
   padding-top: 1%;
   padding-bottom: 1%;
-  color: white;
   position: relative;
   text-align: center;
 }
 
 .marker-menu {
-  background-color: rgb(87, 90, 184);
+  background-color: var(--tertiary);
 }
 
 .active-color {
-  background-color: rgb(175, 250, 0);
+  background-color: var(--accent);
 }
+
+html body .leaflet-control-container .leaflet-top .leaflet-control-zoom { 
+  a {
+    color: rgb(9, 12, 99); 
+    background-color: var(--accent);
+  }
+
+  *.leaflet-disabled {
+    background-color: var(--tertiary);
+    color: rgb(9, 12, 99);
+  }
+ }
