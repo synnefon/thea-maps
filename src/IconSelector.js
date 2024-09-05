@@ -6,18 +6,18 @@ import { Icons, getIconSvg } from './MapIcon';
 import './style.css';
 
 const choosableIcons = [
-    // Icons.RED,
-    // Icons.YELLOW,
-    // Icons.PURPLE,
-    Icons.ALERT,
-    Icons.HOUSE,
-    Icons.MONEY,
-    Icons.PERSON,
-    Icons.FLAG
+    // [Icons.PLAYERS, "Players"],
+    [Icons.ALERT, "What is that?"],
+    [Icons.MONEY, "Store"],
+    [Icons.PERSON, "NPC"],
+    [Icons.FARMERS, "Farmers"],
+    [Icons.CHURCH, "Church"],
+    [Icons.MERCHANTS, "Merchants"],
+    [Icons.THIEVES, "Thieves"]
 ]
 
 
-function MakeButton(icon, handleSelectedIcon, selectedIcon, setSelectedIcon) {
+function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon) {
     const buttonSize = isMobile ? 50 : 100
 
     return (
@@ -44,6 +44,7 @@ function MakeButton(icon, handleSelectedIcon, selectedIcon, setSelectedIcon) {
                     src={getIconSvg(icon)}
                     alt={`${icon} marker selector button`}
                 />
+                <h4>{description}</h4>
             </Button> 
         </div>
     )
@@ -57,7 +58,7 @@ export function IconSelector({handleSelectedIcon}) {
             className='marker-menu'
         >
             {!isMobile && <h1 className='instructions'> &nbsp;DOUBLE-CLICK TO ADD A MARKER</h1>}
-            {choosableIcons.map((icon) => MakeButton(icon, handleSelectedIcon, selectedIcon, setSelectedIcon))}
+            {choosableIcons.map(([icon, description]) => MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon))}
             {isMobile && <h2 className='instructions mobile'> DOUBLE-CLICK TO ADD A MARKER</h2>}
             {isMobile && <div><br/><br/><br/><br/><br/></div>}
         </Control>
