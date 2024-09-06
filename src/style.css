@@ -55,14 +55,13 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
 
 .marker-button {
   background-color: var(--tertiary);
-  width: max(6vw, 75px);
-  height: max(10vh, 47px);
+  width: min(max(7vw, 70px), 100px);
+  height: min(max(10vh, 47px), 120px);
   text-align: center;
-  /* height: max(7vh, 73px) */
 }
 
 .icon-image {
-  width: 6.5vmin;
+  width: min(6.5vmin, 80px); 
   margin:auto;
 }
 
@@ -76,7 +75,7 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
   z-index: 100;
   top: max(15vh, 75px);
   left: min(-8.5vw, -90px);
-  width: max(8.5vw, 93px);
+  width: min(max(10vw, 93px), 150px);
   padding-right: 5px;
   padding-top: 0.5%;
   padding-bottom: 0.5%;

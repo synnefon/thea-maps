@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import {isMobile} from 'react-device-detect';
 import Button from 'react-bootstrap/Button';
 import { Icons, getIconSvg } from './MapIcon';
 import './style.css';
@@ -20,7 +19,6 @@ function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSele
     return (
         <tr key={`tr - ${icon.toString()}`}>
             <td
-                scope="row"
                 className='marker-wrapper'
                 key={`td - ${icon.toString()}`}
             >
@@ -57,7 +55,6 @@ export function IconSelector({handleSelectedIcon}) {
                 <li className='instructions'>select marker</li>
                 <li className='instructions'>double-click map</li>
             </ol>
-            {/* <br/> */}
             <table className='icon-selector-table'>
                 <colgroup>
                     <col />
