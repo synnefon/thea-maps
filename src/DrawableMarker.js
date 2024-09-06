@@ -21,7 +21,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker}) {
     useEffect(() => {
         document.addEventListener("keydown", keydownListener);
         return () => document.removeEventListener("keydown", keydownListener);
-    }, [setNewMarker])
+    }, [setNewMarker, keydownListener])
 
     const openPopup = () => {
         if (newMarker && newMarker.id === marker.id && markerRef.current) { 
