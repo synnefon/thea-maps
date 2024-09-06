@@ -3,6 +3,11 @@
   --secondary: #7776B3;
   --tertiary: #9B86BD;
   --accent: #E2BBE9;
+  --menu: rgb(188, 178, 178);
+}
+
+body {
+  background-color: var(--primary);
 }
 
 .leaflet-container {
@@ -10,68 +15,99 @@
   height: 100vh;
   background-color: var(--primary);
   text-align: center;
-}
-
-.instructions {
-  background-color: var(--primary);
-  color: white;
   position: relative;
-  text-align: left;
-  text-wrap: wrap;
   z-index: 1;
-  pointer-events: none;
-}
-
-.instructions.mobile {
-  width: 169px;
-  padding-left: 6px;
-  padding-right: 6px;
-}
-
-.marker-wrapper {
-  float: left;
-}
-
-.marker-button {
-  background-color: var(--tertiary);
-}
-
-.leaflet-control-container .leaflet-bottom.leaflet-left {
-  @media (any-hover: hover) {
-    background-color: var(--primary);
-    /* font-size: 94%; */
-  }
-  padding-right: 15px;
-}
-
-.icon-image {
-  height: 100;
-  width: 100px; 
-  @media screen and (max-device-width: 540px) {
-    width: 50px; 
-  };
-}
-
-.active-icon {
-  background-color: var(--accent);
 }
 
 html body .leaflet-control-container .leaflet-top .leaflet-control-zoom { 
   a {
-    color: rgb(9, 12, 99); 
+    color: var(--primary); 
     background-color: var(--accent);
-    width: 100px;
-    height: 50px;
+    width: max(5vw, 28.5);
+    height: max(5vh, 28.5);
     border-color: var(--primary);
     text-align: center;
-
-    @media screen and (max-device-width: 540px) {
-      width: 50px; 
-    }
   }
 
   *.leaflet-disabled {
     background-color: rgb(133, 134, 159);
     color: rgb(9, 12, 99);
   }
- }
+}
+
+.leaflet-popup-tip {
+  background-color: var(--secondary);
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: var(--secondary);
+}
+
+.leaflet-popup-close-button span {
+  color: white
+}
+
+.delete-marker-button {
+  background-color: var(--secondary);
+  color: white;
+  font-weight: bold;
+}
+
+.marker-button {
+  background-color: var(--tertiary);
+  width: max(6vw, 75px);
+  height: max(10vh, 47px);
+  text-align: center;
+  /* height: max(7vh, 73px) */
+}
+
+.icon-image {
+  width: 6.5vmin;
+  margin:auto;
+}
+
+.active-icon {
+  background-color: var(--accent);
+}
+
+.sidebar {
+  background-color: var(--menu);
+  position: absolute;
+  z-index: 100;
+  top: max(15vh, 75px);
+  left: min(-8.5vw, -90px);
+  width: max(8.5vw, 93px);
+  padding-right: 5px;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  transition: left 0.3s ease-in-out;
+}
+
+.sidebar-toggle {
+  background-color: var(--menu);
+  position: absolute;
+  top: 20%;
+  right: -25px;
+  height: 40px;
+  width: 20px;
+  z-index: 100;
+}
+
+.sidebar.open {
+  left: 0vw;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 1%;
+  /* table {
+    margin:auto;
+  } */
+}
+
+.instructions {
+  margin-left: 12%;
+  text-align: left
+}
+
+.marker-description {
+  font-size: min(2vmin, 13px);
+}

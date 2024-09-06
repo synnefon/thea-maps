@@ -1,9 +1,9 @@
-import {Map} from './Map'
+import { Map } from './Map'
 
-function App() {
+export default function App() {
   return (
-    <Map/>
-  );
+    <span>
+      <Map/>
+    </span>
+  )
 }
-
-export default App;

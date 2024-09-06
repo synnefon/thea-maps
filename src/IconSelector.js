@@ -1,66 +1,71 @@
 import { useState } from 'react';
 import {isMobile} from 'react-device-detect';
-import Control from 'react-leaflet-custom-control'
 import Button from 'react-bootstrap/Button';
 import { Icons, getIconSvg } from './MapIcon';
 import './style.css';
 
 const choosableIcons = [
-    // [Icons.PLAYERS, "Players"],
-    [Icons.ALERT, "What is that?"],
-    [Icons.MONEY, "Store"],
-    [Icons.PERSON, "NPC"],
     [Icons.FARMERS, "Farmers"],
     [Icons.CHURCH, "Church"],
     [Icons.MERCHANTS, "Merchants"],
-    [Icons.THIEVES, "Thieves"]
+    [Icons.THIEVES, "Thieves"],
+    // [Icons.PLAYERS, "Players"],
+    [Icons.ALERT, "???"],
+    [Icons.MONEY, "Store"],
+    [Icons.PERSON, "NPC"],
 ]
 
 
 function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon) {
-    const buttonSize = isMobile ? 50 : 100
-
     return (
-        <div 
-            className={`${isMobile ? '' : 'marker-wrapper'}`}
-            style = {{ 'width': `${buttonSize}px` }}
-            key={icon.toString()}
-        >
-            <Button 
-                key={icon.toString()}
-                className={`marker-button ${selectedIcon === icon? 'active-icon' : ''}`}
-                onClick={() => {
-                    if (selectedIcon !== icon) {
-                        setSelectedIcon(icon)
-                        handleSelectedIcon(icon)
-                    } else {
-                        handleSelectedIcon(null)
-                        setSelectedIcon(null)
-                    }
-                }}
-            > 
-                <img 
-                    className='icon-image'
-                    src={getIconSvg(icon)}
-                    alt={`${icon} marker selector button`}
-                />
-                <h4>{description}</h4>
-            </Button> 
-        </div>
+        <tr key={`tr - ${icon.toString()}`}>
+            <td
+                scope="row"
+                className='marker-wrapper'
+                key={`td - ${icon.toString()}`}
+            >
+                <Button 
+                    key={`button - ${icon.toString()}`}
+                    className={`marker-button ${selectedIcon === icon? 'active-icon' : ''}`}
+                    onClick={() => {
+                        if (selectedIcon !== icon) {
+                            setSelectedIcon(icon)
+                            handleSelectedIcon(icon)
+                        } else {
+                            handleSelectedIcon(null)
+                            setSelectedIcon(null)
+                        }
+                    }}
+                > 
+                    <img 
+                        className='icon-image'
+                        src={getIconSvg(icon)}
+                        alt={`${icon} marker selector button`}
+                    />
+                    <h4 className='marker-description'>{description}</h4>
+                </Button> 
+            </td>
+        </tr>
     )
 }
 
 export function IconSelector({handleSelectedIcon}) {
     const [selectedIcon, setSelectedIcon] = useState(Icons.RED)
     return (
-        <Control 
-            position='bottomleft'
-            className='marker-menu'
-        >
-            {!isMobile && <h1 className='instructions'> &nbsp;DOUBLE-CLICK TO ADD A MARKER</h1>}
-            {choosableIcons.map(([icon, description]) => MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon))}
-            {isMobile && <h2 className='instructions mobile'> DOUBLE-CLICK TO ADD A MARKER</h2>}
-            {isMobile && <div><br/><br/><br/><br/><br/></div>}
-        </Control>
+        <span>
+            <ol>
+                <li className='instructions'>select marker</li>
+                <li className='instructions'>double-click map</li>
+            </ol>
+            {/* <br/> */}
+            <table className='icon-selector-table'>
+                <colgroup>
+                    <col />
+                </colgroup>
+                <tbody>
+                    {choosableIcons.map(([icon, description]) => MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon))}
+                </tbody>
+            </table>
+        </span>
     )
 }
