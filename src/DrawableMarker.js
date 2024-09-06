@@ -5,23 +5,29 @@ import Button from 'react-bootstrap/Button';
 import { createIcon } from './MapIcon';
 
 
-function DrawableMarker({marker, markers, setMarkers, newMarker, setNewMarker}) {
+function DrawableMarker({marker, addMarker, newMarker, setNewMarker}) {
     const [description, setDescription] = useState(null)
     const markerRef = useRef()
 
     useEffect(() => {
         const keydownListener = event => {
-          if (event.code === "Enter" || event.code === "NumpadEnter" || event.code === "Escape") {
+            if (!["Enter", "NumpadEnter", "Escape"].includes(event.code)) return
+            if (!markerRef.current) return
+            
             event.preventDefault()
-            if (markerRef.current) {
-                markerRef.current.closePopup()
-                setNewMarker(null)
-            }
-          }
-        };
+            markerRef.current.closePopup()
+            setNewMarker(null)
+        }
+
         document.addEventListener("keydown", keydownListener);
         return () => document.removeEventListener("keydown", keydownListener);
-    }, [setNewMarker]);
+    }, [setNewMarker])
+
+    const openPopup = () => {
+        if (newMarker && newMarker.id === marker.id && markerRef.current) { 
+            markerRef.current.openPopup()
+        }
+    }
 
     return (
         <Marker 
@@ -30,19 +36,16 @@ function DrawableMarker({marker, markers, setMarkers, newMarker, setNewMarker}) 
             bubblingMouseEvents={true}
             position={marker.position}
             eventHandlers={{ 
-                popupclose: () => {
-                    console.log("here")
-                    upsertMarker(marker)
-                },
-                add: () => { if (newMarker && newMarker.id === marker.id && markerRef.current) { markerRef.current.openPopup()}}
+                popupclose: () => upsertMarker(marker),
+                add: openPopup
             }}
             icon={createIcon(marker.icon)}
         >
             <Popup className="marker-popup"> 
                 <Button 
                     className='delete-marker-button'
-                    onClick={function(e) {
-                        setMarkers(markers.filter((m) => m.id !== marker.id))
+                    onClick={(e) => {
+                        addMarker(marker)
                         deleteMarker(marker)
                         e.stopPropagation()
                     }}
@@ -66,12 +69,13 @@ function DrawableMarker({marker, markers, setMarkers, newMarker, setNewMarker}) 
 }
 
 export function DrawableMarkers({markers, setMarkers, newMarker, setNewMarker}) {
+    const addMarker = (marker) => setMarkers(markers.filter((m) => m.id !== marker.id))
+    
     return markers.map((marker, _) => (
         <DrawableMarker 
             key={`drawable ${marker.id}`}
             marker={marker}
-            markers={markers}
-            setMarkers={setMarkers}
+            addMarker={addMarker}
             newMarker={newMarker}
             setNewMarker={setNewMarker}
         />

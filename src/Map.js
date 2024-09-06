@@ -11,12 +11,11 @@ import './style.css';
 
 
 class MapMarker {
-    constructor(id, position, description, icon, isNew=false) {
+    constructor(id, position, description, icon) {
         this.id = id
         this.position = position
         this.description = description
         this.icon = icon
-        this.isNew = isNew
     }
 }
 
@@ -43,7 +42,7 @@ export function Map() {
             dblclick(e) {
                 if (!activeIcon) return
 
-                const m = new MapMarker(uuidv4(), [e.latlng.lat, e.latlng.lng], "", activeIcon, true)
+                const m = new MapMarker(uuidv4(), [e.latlng.lat, e.latlng.lng], "", activeIcon)
                 setMarkers(markers.concat([m]))
                 upsertMarker(m)
                 setNewMarker(m)
@@ -77,4 +76,4 @@ export function Map() {
             />
         </div>
     ); 
-  }
+}
