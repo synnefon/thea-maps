@@ -73,7 +73,7 @@ export function Map() {
                 doubleClickZoom={false}
                 autoPanOnFocus={false}
                 maxBounds={mapBounds}
-                maxBoundsViscosity={0.1}
+                maxBoundsViscosity={1}
             >
                 <RegisterMapEvents/>
                 <TileLayer url={'../althea/{z}/{x}/{y}.png'}/>
