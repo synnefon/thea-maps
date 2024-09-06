@@ -8,7 +8,6 @@ const choosableIcons = [
     [Icons.CHURCH, "Church"],
     [Icons.MERCHANTS, "Merchants"],
     [Icons.THIEVES, "Thieves"],
-    // [Icons.PLAYERS, "Players"],
     [Icons.ALERT, "???"],
     [Icons.MONEY, "Store"],
     [Icons.PERSON, "NPC"],
@@ -26,13 +25,9 @@ function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSele
                     key={`button - ${icon.toString()}`}
                     className={`marker-button ${selectedIcon === icon? 'active-icon' : ''}`}
                     onClick={() => {
-                        if (selectedIcon !== icon) {
-                            setSelectedIcon(icon)
-                            handleSelectedIcon(icon)
-                        } else {
-                            handleSelectedIcon(null)
-                            setSelectedIcon(null)
-                        }
+                        const newIcon = selectedIcon !== icon ? icon : null
+                        setSelectedIcon(newIcon)
+                        handleSelectedIcon(newIcon)
                     }}
                 > 
                     <img 
@@ -51,10 +46,6 @@ export function IconSelector({handleSelectedIcon}) {
     const [selectedIcon, setSelectedIcon] = useState(Icons.RED)
     return (
         <span>
-            <ol>
-                <li className='instructions'>select marker</li>
-                <li className='instructions'>double-click map</li>
-            </ol>
             <table className='icon-selector-table'>
                 <colgroup>
                     <col />

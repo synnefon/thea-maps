@@ -9,16 +9,16 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker}) {
     const [description, setDescription] = useState(null)
     const markerRef = useRef()
 
-    useEffect(() => {
-        const keydownListener = event => {
-            if (!["Enter", "NumpadEnter", "Escape"].includes(event.code)) return
-            if (!markerRef.current) return
-            
-            event.preventDefault()
-            markerRef.current.closePopup()
-            setNewMarker(null)
-        }
+    const keydownListener = (e) => {
+        if (!["Enter", "NumpadEnter", "Escape"].includes(e.code)) return
+        if (!markerRef.current) return
+        
+        e.preventDefault()
+        markerRef.current.closePopup()
+        setNewMarker(null)
+    }
 
+    useEffect(() => {
         document.addEventListener("keydown", keydownListener);
         return () => document.removeEventListener("keydown", keydownListener);
     }, [setNewMarker])

@@ -25,12 +25,6 @@ export function Map() {
     const [markers, setMarkers] = useState([])
     const [newMarker, setNewMarker] = useState(null)
     const [activeIcon, setActiveIcon] = useState(null)
-        
-    const loadMarkersData = async () => {
-        fetchMarkers().then((markersData) => {
-            setMarkers(markersData.Items.map((entry) => new MapMarker(entry.id, entry.position, entry.description, entry.icon)))
-        })
-    }
 
     const mapBounds = Leaflet.latLngBounds(
         Leaflet.latLng(52, -180), // Southwest coordinates
@@ -38,21 +32,36 @@ export function Map() {
     )
 
     const LocationMarkers = () => {
-        useMapEvents({
-            dblclick(e) {
-                if (!activeIcon) return
-
-                const m = new MapMarker(uuidv4(), [e.latlng.lat, e.latlng.lng], "", activeIcon)
-                setMarkers(markers.concat([m]))
-                upsertMarker(m)
-                setNewMarker(m)
-            }
-        })
-
-        return <DrawableMarkers markers={markers} setMarkers={setMarkers} newMarker={newMarker} setNewMarker={setNewMarker}/>
+        return (
+            <DrawableMarkers
+                markers={markers}
+                setMarkers={setMarkers}
+                newMarker={newMarker}
+                setNewMarker={setNewMarker}
+            />
+        )
     }
 
-    useEffect(() => { loadMarkersData() }, []);
+    const loadMarkersData = async () => {
+        fetchMarkers().then((markersData) => {
+            setMarkers(markersData.Items.map((entry) => new MapMarker(entry.id, entry.position, entry.description, entry.icon)))
+        })
+    }
+
+    useEffect(() => { loadMarkersData() }, [])
+
+    const createMarker = (latlng) => {
+        if (!activeIcon) return
+
+        const m = new MapMarker(uuidv4(), [latlng.lat, latlng.lng], "", activeIcon)
+        setMarkers(markers.concat([m]))
+        upsertMarker(m)
+        setNewMarker(m)
+    }
+
+    const RegisterMapEvents = () => {
+        useMapEvents({ dblclick(e) { createMarker(e.latlng) }})
+    }
 
     return (
         <div className='map'>
@@ -64,10 +73,18 @@ export function Map() {
                 doubleClickZoom={false}
                 autoPanOnFocus={false}
                 maxBounds={mapBounds}
-                maxBoundsViscosity={1.0}
+                maxBoundsViscosity={0.1}
             >
+                <RegisterMapEvents/>
                 <TileLayer url={'../althea/{z}/{x}/{y}.png'}/>
                 <LocationMarkers/>
+                <h2>
+                    <br/>
+                    <ol className='instructions'>
+                        <li>select marker</li>
+                        <li>double-click map</li>
+                    </ol>
+                </h2>
             </MapContainer>
             <SideBar 
                 isOpen={sidebarOpen} 
