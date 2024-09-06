@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { createIcon } from './MapIcon';
 
 
-function DrawableMarker({marker, markers, setMarkers}) {
+function DrawableMarker({marker, markers, setMarkers, newMarker, setNewMarker}) {
     const [description, setDescription] = useState(null)
     const markerRef = useRef()
 
@@ -13,7 +13,10 @@ function DrawableMarker({marker, markers, setMarkers}) {
         const keydownListener = event => {
           if (event.code === "Enter" || event.code === "NumpadEnter" || event.code === "Escape") {
             event.preventDefault()
-            if (markerRef.current) markerRef.current.openPopup()
+            if (markerRef.current) {
+                markerRef.current.closePopup()
+                setNewMarker(null)
+            }
           }
         };
         document.addEventListener("keydown", keydownListener);
@@ -27,8 +30,11 @@ function DrawableMarker({marker, markers, setMarkers}) {
             bubblingMouseEvents={true}
             position={marker.position}
             eventHandlers={{ 
-                popupclose: () => upsertMarker(marker),
-                add: () => { if (marker.isNew && markerRef.current) markerRef.current.openPopup() }
+                popupclose: () => {
+                    console.log("here")
+                    upsertMarker(marker)
+                },
+                add: () => { if (newMarker && newMarker.id === marker.id && markerRef.current) { markerRef.current.openPopup()}}
             }}
             icon={createIcon(marker.icon)}
         >
@@ -59,6 +65,15 @@ function DrawableMarker({marker, markers, setMarkers}) {
     )
 }
 
-export function DrawableMarkers({markers, setMarkers}) {
-    return markers.map((marker, _) => <DrawableMarker key={`drawable ${marker.id}`} marker={marker} markers={markers} setMarkers={setMarkers}/>)
+export function DrawableMarkers({markers, setMarkers, newMarker, setNewMarker}) {
+    return markers.map((marker, _) => (
+        <DrawableMarker 
+            key={`drawable ${marker.id}`}
+            marker={marker}
+            markers={markers}
+            setMarkers={setMarkers}
+            newMarker={newMarker}
+            setNewMarker={setNewMarker}
+        />
+    ))
 } 

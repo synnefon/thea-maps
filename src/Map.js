@@ -24,6 +24,7 @@ export function Map() {
     const [sidebarOpen, setSideBarOpen] = useState(true);
     const handleViewSidebar = () => setSideBarOpen(!sidebarOpen)
     const [markers, setMarkers] = useState([])
+    const [newMarker, setNewMarker] = useState(null)
     const [activeIcon, setActiveIcon] = useState(null)
         
     const loadMarkersData = async () => {
@@ -42,13 +43,14 @@ export function Map() {
             dblclick(e) {
                 if (!activeIcon) return
 
-                const newMarker = new MapMarker(uuidv4(), [e.latlng.lat, e.latlng.lng], "", activeIcon, true)
-                setMarkers(markers.concat([newMarker]))
-                upsertMarker(newMarker)
+                const m = new MapMarker(uuidv4(), [e.latlng.lat, e.latlng.lng], "", activeIcon, true)
+                setMarkers(markers.concat([m]))
+                upsertMarker(m)
+                setNewMarker(m)
             }
         })
 
-        return <DrawableMarkers markers={markers} setMarkers={setMarkers}/>
+        return <DrawableMarkers markers={markers} setMarkers={setMarkers} newMarker={newMarker} setNewMarker={setNewMarker}/>
     }
 
     useEffect(() => { loadMarkersData() }, []);
