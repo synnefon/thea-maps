@@ -21,7 +21,7 @@ function DrawableMarker({marker, markers, setMarkers, newMarker, setNewMarker}) 
         };
         document.addEventListener("keydown", keydownListener);
         return () => document.removeEventListener("keydown", keydownListener);
-    }, []);
+    }, [setNewMarker]);
 
     return (
         <Marker 
