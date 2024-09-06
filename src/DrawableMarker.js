@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { createIcon } from './MapIcon';
 
 
-function DrawableMarker({marker, addMarker, newMarker, setNewMarker}) {
+function DrawableMarker({marker, removeMarker, newMarker, setNewMarker}) {
     const [description, setDescription] = useState(null)
     const markerRef = useRef()
 
@@ -45,7 +45,7 @@ function DrawableMarker({marker, addMarker, newMarker, setNewMarker}) {
                 <Button 
                     className='delete-marker-button'
                     onClick={(e) => {
-                        addMarker(marker)
+                        removeMarker(marker)
                         deleteMarker(marker)
                         e.stopPropagation()
                     }}
@@ -69,13 +69,13 @@ function DrawableMarker({marker, addMarker, newMarker, setNewMarker}) {
 }
 
 export function DrawableMarkers({markers, setMarkers, newMarker, setNewMarker}) {
-    const addMarker = (marker) => setMarkers(markers.filter((m) => m.id !== marker.id))
+    const removeMarker = (marker) => setMarkers(markers.filter((m) => m.id !== marker.id))
     
     return markers.map((marker, _) => (
         <DrawableMarker 
             key={`drawable ${marker.id}`}
             marker={marker}
-            addMarker={addMarker}
+            removeMarker={removeMarker}
             newMarker={newMarker}
             setNewMarker={setNewMarker}
         />
