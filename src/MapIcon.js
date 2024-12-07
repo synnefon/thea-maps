@@ -38,7 +38,7 @@ export const getIconSvg = (icon) => {
 
 export const createIcon = (icon = Icons.RED, zoomLevel = 1) => {
     const iconvg = getIconSvg(icon)
-    const dim = 35 * (zoomLevel / 3)
+    const dim = 38 * (zoomLevel / 3)
 
     return new L.Icon({
         iconUrl: iconvg,
