@@ -49,7 +49,6 @@ export function IconSelector({handleSelectedIcon}) {
                     <col />
                 </colgroup>
                 <tbody>
-                    {/* <caption className = {"sidebar-toggle open"}>test</caption> */}
                     {choosableIcons.map(([icon, description]) => MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon))}
                 </tbody>
             </table>

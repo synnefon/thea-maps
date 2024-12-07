@@ -26,6 +26,7 @@ export function Map() {
     const [markers, setMarkers] = useState([])
     const [newMarker, setNewMarker] = useState(null)
     const [activeIcon, setActiveIcon] = useState(null)
+    const [zoomLevel, setZoomLevel] = useState(isMobile ? 1 : 3);
 
     const mapBounds = Leaflet.latLngBounds(
         Leaflet.latLng(52, -180), // Southwest coordinates
@@ -39,6 +40,7 @@ export function Map() {
                 setMarkers={setMarkers}
                 newMarker={newMarker}
                 setNewMarker={setNewMarker}
+                zoomLevel={zoomLevel}
             />
         )
     }
@@ -61,14 +63,17 @@ export function Map() {
     }
 
     const RegisterMapEvents = () => {
-        useMapEvents({ dblclick(e) { createMarker(e.latlng) }})
+        const mapEvents = useMapEvents({
+             dblclick(e) { createMarker(e.latlng) },
+             zoomend() {setZoomLevel(mapEvents.getZoom());},
+        })
     }
 
     return (
         <div className='map'>
             <MapContainer
                 center={[0, 0]} 
-                zoom={isMobile ? 1 : 3}
+                zoom={zoomLevel}
                 minZoom={isMobile ? 1 : 3}
                 maxZoom={isMobile ? 5 : 6}
                 doubleClickZoom={false}

@@ -36,15 +36,16 @@ export const getIconSvg = (icon) => {
     }[icon]
 }
 
-export const createIcon = (icon = Icons.RED) => {
+export const createIcon = (icon = Icons.RED, zoomLevel = 1) => {
     const iconvg = getIconSvg(icon)
+    const dim = 35 * (zoomLevel / 3)
 
     return new L.Icon({
         iconUrl: iconvg,
         iconRetinaUrl: iconvg,
         popupAnchor:  [0, 0],
         iconAnchor: [19, 17],
-        iconSize: [35,35],     
+        iconSize: [dim,dim],     
     })
 }
 

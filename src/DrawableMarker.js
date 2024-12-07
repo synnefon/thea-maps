@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { createIcon } from './MapIcon';
 
 
-function DrawableMarker({marker, removeMarker, newMarker, setNewMarker}) {
+function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLevel}) {
     const [description, setDescription] = useState(null)
     const markerRef = useRef()
 
@@ -30,7 +30,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker}) {
     }
 
     return (
-        <Marker 
+        <Marker
             key={`marker-${marker.id}`}
             ref={markerRef}
             bubblingMouseEvents={true}
@@ -39,7 +39,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker}) {
                 popupclose: () => upsertMarker(marker),
                 add: openPopup
             }}
-            icon={createIcon(marker.icon)}
+            icon={createIcon(marker.icon, zoomLevel)}
         >
             <Popup className="marker-popup"> 
                 <Button 
@@ -68,7 +68,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker}) {
     )
 }
 
-export function DrawableMarkers({markers, setMarkers, newMarker, setNewMarker}) {
+export function DrawableMarkers({markers, setMarkers, newMarker, setNewMarker, zoomLevel}) {
     const removeMarker = (marker) => setMarkers(markers.filter((m) => m.id !== marker.id))
     
     return markers.map((marker, _) => (
@@ -78,6 +78,7 @@ export function DrawableMarkers({markers, setMarkers, newMarker, setNewMarker}) 
             removeMarker={removeMarker}
             newMarker={newMarker}
             setNewMarker={setNewMarker}
+            zoomLevel={zoomLevel}
         />
     ))
 } 
