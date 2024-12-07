@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
+import { v4 as uuidv4 } from 'uuid';
 import Leaflet from 'leaflet'
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
-import { v4 as uuidv4 } from 'uuid';
+
 import { upsertMarker, fetchMarkers } from './DatabaseHandler';
 import { SideBar } from './SideBar'
 import { DrawableMarkers } from './DrawableMarker';
@@ -76,7 +77,10 @@ export function Map() {
                 maxBoundsViscosity={1}
             >
                 <RegisterMapEvents/>
-                <TileLayer url={'../althea/{z}/{x}/{y}.png'}/>
+                <TileLayer 
+                    className='tile-layer'
+                    url={'../althea/{z}/{x}/{y}.png'}
+                />
                 <LocationMarkers/>
                 <h2>
                     <br/>
