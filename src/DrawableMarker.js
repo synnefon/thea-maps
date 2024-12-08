@@ -54,6 +54,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
                 </Button>
                 <br/> <br/>
                 <input
+                    className = "popup-input"
                     id={`form - ${marker.id}`}
                     type='text' 
                     value={description || marker.description}

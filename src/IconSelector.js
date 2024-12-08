@@ -18,20 +18,20 @@ function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSele
     return (
         <tr key={`tr - ${icon.toString()}`}>
             <td
-                className={`marker-wrapper${selectedIcon === icon? ' active-icon' : ''}`}
+                className={`marker-wrapper${selectedIcon === icon? ' marker-active' : ''}`}
                 key={`td - ${icon.toString()}`}
+                onClick={
+                    () => {
+                        const newIcon = selectedIcon !== icon ? icon : null
+                        setSelectedIcon(newIcon)
+                        handleSelectedIcon(newIcon)
+                    }
+                }
             >
                 <img 
                     className={`icon-image`}
                     src={getIconSvg(icon)}
                     alt={`${icon} marker selector button`}
-                    onClick={
-                        () => {
-                            const newIcon = selectedIcon !== icon ? icon : null
-                            setSelectedIcon(newIcon)
-                            handleSelectedIcon(newIcon)
-                        }
-                    }
                 ></img>
                 <h4 className='marker-description'>{description}</h4>
             </td>
@@ -45,7 +45,6 @@ export function IconSelector({handleSelectedIcon}) {
         <span>
             <table className='icon-selector-table'>
                 <colgroup>
-                    <col />
                     <col />
                 </colgroup>
                 <tbody>

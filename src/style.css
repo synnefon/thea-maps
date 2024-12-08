@@ -1,9 +1,9 @@
 :root {
   --primary: #111111;
   --secondary: #858d9c; 
-  --tertiary: #9daac5;
+  --tertiary: #bcc5da;
   --accent: #6082bd;
-  --menu: #282c34;
+  --hover: #282c34;
 }
 
 body {
@@ -26,41 +26,81 @@ body {
 
 html body .leaflet-control-container .leaflet-top .leaflet-control-zoom { 
   a {
-    color: var(--primary); 
+    color: white; 
     background-color: var(--secondary);
     width: max(5vw, 28.5);
     height: max(5vh, 28.5);
-    border-color: var(--tertiary);
     text-align: center;
+  }
+
+  :hover {
+    background-color: var(--hover);
+    color: white;
   }
 
   *.leaflet-disabled {
     background-color: var(--tertiary);
     color: var(--secondary);
+    span {
+      background-color: var(--tertiary);
+    }
   }
 }
 
+.leaflet-pane.leaflet-marker-pane img:hover {
+  filter: invert(1);
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
 .leaflet-popup-tip {
-  background-color: var(--secondary);
+  background-color: var(--tertiary);
 }
 
 .leaflet-popup-content-wrapper {
-  background-color: var(--secondary);
+  background-color: var(--tertiary);
 }
 
 .leaflet-popup-close-button span {
   color: white
 }
 
+.popup-input {
+  background-color: var(--tertiary);
+  border-width: 0px;
+  border-bottom: 1px;
+  border-style: solid;
+  text-transform: capitalize;
+  font-weight: bold;
+  outline: None;
+}
+
 .marker-wrapper {
   text-align: center;
   background-color: var(--secondary);
+  border-radius: 5px;
+}
+.marker-wrapper:hover {
+  background-color: var(--hover);
+  color: white;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.marker-active {
+  background-color: var(--accent);
 }
 
 .delete-marker-button {
-  background-color: var(--secondary);
+  background-color: var(--tertiary);
   color: white;
   font-weight: bold;
+  border-style: solid;
+  border-width: 1px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.delete-marker-button:hover {
+  background-color: var(--hover);
 }
 
 .marker-button {
@@ -69,17 +109,17 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
   text-align: center;
 }
 
+.marker-description {
+  font-size: min(2vmin, 13px);
+  color: white;
+}
+
 .icon-image {
   width: min(6.5vmin, 80px); 
   background-color: transparent;
 }
 
-.active-icon {
-  background-color: var(--accent);
-}
-
 .sidebar {
-  background-color: var(--menu);
   background-color: transparent;
   position: absolute;
   z-index: 100;
@@ -110,6 +150,16 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
   height: 40px;
   width: 35px;
   z-index: 100;
+  border-radius: 0px;
+  border-style: hidden;
+  border-radius: 5px;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--hover);
+  color: white;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
 
 .instructions {
@@ -117,9 +167,4 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
   text-align: left;
   color: white;
   background-color: var(--primary);
-}
-
-.marker-description {
-  font-size: min(2vmin, 13px);
-  color: white;
 }
