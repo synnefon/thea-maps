@@ -16,6 +16,8 @@ const choosableIcons = [
 ]
 
 // Create and return a button object as a table row containing a Button object within a table data.
+// TODO: Table rows are crazy.  Don't use those.  Surprisingly, I really enjoy HTML/CSS programming;
+// this styling might just be my first action item.
 function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon) {
     return (
         <tr key={`tr - ${icon.toString()}`}>
