@@ -9,7 +9,7 @@ import merchants from './assets/merchants.svg'
 import thieves from './assets/thieves.svg'
 import players from './assets/red-marker.svg'
 
-
+// Construct each icon's SVG file.
 export const Icons = Object.freeze({
     PERSON: "person",
     ALERT: "alert",
@@ -22,6 +22,7 @@ export const Icons = Object.freeze({
     PLAYERS: "players"
 });
 
+// Given an icon name, return the corresponding SVG file.
 export const getIconSvg = (icon) => {
     return  {
         [Icons.PERSON]: person,
@@ -36,6 +37,9 @@ export const getIconSvg = (icon) => {
     }[icon]
 }
 
+// Create and return a new Icon object.  If no parameter is passed, create a
+// blank red icon.  Otherwise, if given an icon name, attempt to find the
+// corresoponding SVG file.
 export const createIcon = (icon = Icons.RED, zoomLevel = 1) => {
     const iconvg = getIconSvg(icon)
     const dim = 38 * (zoomLevel / 3)
@@ -48,5 +52,3 @@ export const createIcon = (icon = Icons.RED, zoomLevel = 1) => {
         iconSize: [dim,dim],     
     })
 }
-
-

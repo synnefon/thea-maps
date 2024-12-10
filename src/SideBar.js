@@ -1,5 +1,6 @@
 import { IconSelector } from "./IconSelector";
 
+// Sidebar object that overlays on the map.
 export function SideBar({isOpen, toggleSidebar, setActiveIcon}) {
     const sidebarClass = isOpen ? "sidebar open" : "sidebar";
     return (

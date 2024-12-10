@@ -4,6 +4,7 @@ import { Icons, getIconSvg } from './MapIcon';
 
 import './style.css';
 
+// Icons which can be selected.
 const choosableIcons = [
     [Icons.FARMERS, "Farmers"],
     [Icons.CHURCH, "Church"],
@@ -14,6 +15,7 @@ const choosableIcons = [
     [Icons.PERSON, "NPC"],
 ]
 
+// Create and return a button object as a table row containing a Button object within a table data.
 function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon) {
     return (
         <tr key={`tr - ${icon.toString()}`}>
@@ -39,6 +41,7 @@ function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSele
     )
 }
 
+// Public interface for creating an IconSelector menu.
 export function IconSelector({handleSelectedIcon}) {
     const [selectedIcon, setSelectedIcon] = useState(Icons.RED)
     return (
