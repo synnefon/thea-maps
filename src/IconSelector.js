@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Icons, getIconSvg } from './MapIcon';
 
-import './style.css';
+import './styles.css';
 
 const choosableIcons = [
     [Icons.FARMERS, "Farmers"],

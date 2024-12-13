@@ -8,7 +8,7 @@ import { upsertMarker, fetchMarkers } from './DatabaseHandler';
 import { SideBar } from './SideBar'
 import { DrawableMarkers } from './DrawableMarker';
 
-import './style.css';
+import './styles.css';
 
 
 class MapMarker {
