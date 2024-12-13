@@ -1,4 +1,4 @@
-html body .leaflet-control-container .leaflet-top .leaflet-control-zoom { 
+.leaflet-control-container .leaflet-top .leaflet-control-zoom { 
   :hover {
     background-color: var(--hover);
     color: white;
@@ -37,8 +37,8 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
 }
 
 .leaflet-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: var(--primary);
   text-align: center;
   position: relative;

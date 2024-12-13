@@ -71,36 +71,36 @@ export function Map() {
     }
 
     return (
-        <div className='map'>
-            <MapContainer
-                center={[0, 0]} 
-                zoom={zoomLevel}
-                minZoom={isMobile ? 1 : 3}
-                maxZoom={isMobile ? 5 : 6}
-                doubleClickZoom={false}
-                autoPanOnFocus={false}
-                maxBounds={mapBounds}
-                maxBoundsViscosity={1}
-            >
-                <RegisterMapEvents/>
-                <TileLayer 
-                    className='tile-layer'
-                    url={'../althea/{z}/{x}/{y}.png'}
-                />
-                <LocationMarkers/>
-                <h2>
-                    <br/>
-                    <ol className='instructions'>
-                        <li>select marker</li>
-                        <li>double-click map</li>
-                    </ol>
-                </h2>
-            </MapContainer>
-            <SideBar 
-                isOpen={sidebarOpen} 
-                toggleSidebar={handleViewSidebar}
-                setActiveIcon={setActiveIcon}
-            />
-        </div>
+       <div className='map'>
+           <MapContainer
+               center={[0, 0]} 
+               zoom={zoomLevel}
+               minZoom={isMobile ? 1 : 3}
+               maxZoom={isMobile ? 5 : 6}
+               doubleClickZoom={false}
+               autoPanOnFocus={false}
+               maxBounds={mapBounds}
+               maxBoundsViscosity={1}
+           >
+               <RegisterMapEvents/>
+               <TileLayer 
+                   className='tile-layer'
+                   url={'../althea/{z}/{x}/{y}.png'}
+               />
+               <LocationMarkers/>
+               <h2>
+                   <br/>
+                   <ol className='instructions'>
+                       <li>select marker</li>
+                       <li>double-click map</li>
+                   </ol>
+               </h2>
+           </MapContainer>
+           <SideBar 
+               isOpen={sidebarOpen} 
+               toggleSidebar={handleViewSidebar}
+               setActiveIcon={setActiveIcon}
+           />
+	</div>
     ); 
 }

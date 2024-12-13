@@ -4,13 +4,48 @@
   --tertiary: #bcc5da;
   --accent: #6082bd;
   --hover: #282c34;
+
+  /* Sizing & borders. */
+  --size-xsmall: 0.1em;
+  --size-small: 0.2em;
+  --size-med: 0.5em;
+  --size-large: 1em;
+  --size-xlarge: 2em;
+  --size-xxlarge: 5em;
+  
+  /* Margins & padding. */
+  --pad-xsmall: 0.1em;
+  --pad-small: 0.2em;
+  --pad-med: 0.5em;
+  --pad-large: 1em;
+  --pad-xlarge: 2em;
 }
 
-body {
-  background-color: var(--primary);
+/* World's simplest reset.css (this is really all you need IMO) :) */
+* {
+  background: transparent;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
+
+/* Map should take up the entire page. */
+body #root .map {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary);
+  color: white;
+}
+
+/* TODO: Add other header sizes. */
+h4 {
+  font-size: min(2vmin, 11px);
+}
+
 a {
-  color: white; 
   background-color: var(--secondary);
   width: max(5vw, 28.5);
   height: max(5vh, 28.5);
@@ -19,97 +54,85 @@ a {
 
 .popup-input {
   background-color: var(--tertiary);
-  border-width: 0px;
-  border-bottom: 1px;
+  border-width: 0;
+  border-bottom: var(--size-xsmall);
   border-style: solid;
   text-transform: capitalize;
   font-weight: bold;
-  outline: None;
 }
 
 .marker-wrapper {
-  padding: 0.2em;
   text-align: center;
   background-color: var(--secondary);
-  border-radius: 5px;
+  border-radius: var(--size-med);
+  padding: var(--pad-small);
 }
+
 .marker-wrapper:hover {
   background-color: var(--hover);
-  color: white;
   transition-duration: 0.4s;
   cursor: pointer;
 }
+
 .marker-active {
   background-color: var(--accent);
 }
 
 .delete-marker-button {
-  background-color: var(--tertiary);
-  color: white;
+  background-color: var(--accent);
+  border: var(--size-xsmall) solid var(--primary);
+  color: maroon;
   font-weight: bold;
-  border-style: solid;
-  border-width: 1px;
   transition-duration: 0.4s;
   cursor: pointer;
 }
+
 .delete-marker-button:hover {
   background-color: var(--hover);
-}
-
-.marker-button {
-  width: min(max(7vw, 70px), 100px);
-  height: min(max(10vh, 47px), 120px);
-  text-align: center;
-}
-
-.marker-description {
-  font-size: min(2vmin, 13px);
-  color: white;
-}
-
-.icon-image {
-  width: min(6.5vmin, 80px); 
-  background-color: transparent;
+  color: red;
 }
 
 .sidebar {
-  background-color: transparent;
   position: absolute;
-  z-index: 100;
-  top: max(15vh, 1.5in);
   left: -120px;
-  padding-right: 35px;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
+  top: 1.1in;
+  z-index: 100;
+
+  padding: var(--pad-med);
   transition: left 0.2s ease-in-out;
 }
 
 .sidebar.open {
-  width: fit-content;
-  left: 0vw;
-  text-align: left;
-  padding-left: 0.5em;
+  left: 0;
+}
+
+.icon-selector-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-small);
+}
+
+.icon-image {
+  width: 80%;
 }
 
 .sidebar-toggle {
-  z-index: 100;
-  background-color: var(--secondary);
-  color: white;
   position: absolute;
-  font-weight: bold;
-  top: 1.1in;
-  left: 0.12in;
-  height: 40px;
-  width: 35px;
+  top: 0.8in;
+  left: 0;
   z-index: 100;
-  border-radius: 0px;
-  border-style: hidden;
-  border-radius: 5px;
+
+  width: var(--size-xlarge);
+  height: var(--size-xlarge);
+  margin: var(--pad-med);
+
+  border-radius: var(--size-med);
+  background-color: var(--secondary);
+  font-weight: bold;
 }
 
 .sidebar-toggle:hover {
   background-color: var(--hover);
-  color: white;
   transition-duration: 0.4s;
   cursor: pointer;
 }
@@ -117,6 +140,5 @@ a {
 .instructions {
   margin-left: 15%;
   text-align: left;
-  color: white;
   background-color: var(--primary);
 }
