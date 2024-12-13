@@ -9,6 +9,7 @@ import { SideBar } from './SideBar'
 import { DrawableMarkers } from './DrawableMarker';
 
 import './styles.css';
+import './leaflet.css';
 
 
 class MapMarker {
