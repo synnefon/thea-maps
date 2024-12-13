@@ -76,6 +76,7 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
 }
 
 .marker-wrapper {
+  padding: 0.2em;
   text-align: center;
   background-color: var(--secondary);
   border-radius: 5px;
@@ -132,11 +133,10 @@ html body .leaflet-control-container .leaflet-top .leaflet-control-zoom {
 }
 
 .sidebar.open {
+  width: fit-content;
   left: 0vw;
-  width: min(max(10vw, 93px), 150px);
   text-align: left;
-  padding-left: 10px;
-  padding-right: 0px;
+  padding-left: 0.5em;
 }
 
 .sidebar-toggle {
