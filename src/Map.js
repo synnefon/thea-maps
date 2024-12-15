@@ -23,7 +23,6 @@ class MapMarker {
 // Create a generic Map object.
 export function Map() {
 
-    // Register React state.
     const [sidebarOpen, setSideBarOpen] = useState(true);
     const handleViewSidebar = () => setSideBarOpen(!sidebarOpen)
     const [markers, setMarkers] = useState([])
@@ -31,13 +30,13 @@ export function Map() {
     const [activeIcon, setActiveIcon] = useState(null)
     const [zoomLevel, setZoomLevel] = useState(isMobile ? 1 : 3);
 
-    // Create a map using Leaflet.
+    // Create an object which defined the bounds of a Leaflet map.
     const mapBounds = Leaflet.latLngBounds(
         Leaflet.latLng(52, -180), // Southwest coordinates
         Leaflet.latLng(86, 0)     // Northeast coordinates
     )
 
-    // The markers we see on the map.
+    // Function which creates location markers to be rendered on the map.
     const LocationMarkers = () => {
         return (
             <DrawableMarkers
@@ -50,14 +49,14 @@ export function Map() {
         )
     }
 
-    // Request each location marker's data, and mark each one a 
+    // Function to request data for each placed marker (icon, description, etc.).
     const loadMarkersData = async () => {
         fetchMarkers().then((markersData) => {
             setMarkers(markersData.Items.map((entry) => new MapMarker(entry.id, entry.position, entry.description, entry.icon)))
         })
     }
 
-    // What does this do?
+    // Load marker data when a Map object is added to the DOM.
     useEffect(() => { loadMarkersData() }, [])
 
     // Define a function that creates and returns  a new MapMarker object.

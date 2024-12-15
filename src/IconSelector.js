@@ -4,7 +4,6 @@ import { Icons, getIconSvg } from './MapIcon';
 
 import './style.css';
 
-// Icons which can be selected.
 const choosableIcons = [
     [Icons.FARMERS, "Farmers"],
     [Icons.CHURCH, "Church"],

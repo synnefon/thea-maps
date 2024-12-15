@@ -24,7 +24,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
         return () => document.removeEventListener("keydown", keydownListener);
     }, [setNewMarker])
 
-    // Open a pop-up window for this marker. 
+    // Open a pop-up window containing details about this marker.
     const openPopup = () => {
         if (newMarker && newMarker.id === marker.id && markerRef.current) { 
             markerRef.current.openPopup()
@@ -47,7 +47,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
 	    // Marker delete button
             <Popup className="marker-popup"> 
                 <Button 
-                    className='delete-mark/er-button'
+                    className='delete-marker-button'
                     onClick={(e) => {
                         removeMarker(marker)
                         deleteMarker(marker)
