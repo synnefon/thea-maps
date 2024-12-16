@@ -1,0 +1,144 @@
+:root {
+  --primary: #111111;
+  --secondary: #858d9c; 
+  --tertiary: #bcc5da;
+  --accent: #6082bd;
+  --hover: #282c34;
+
+  /* Sizing & borders. */
+  --size-xsmall: 0.1em;
+  --size-small: 0.2em;
+  --size-med: 0.5em;
+  --size-large: 1em;
+  --size-xlarge: 2em;
+  --size-xxlarge: 5em;
+  
+  /* Margins & padding. */
+  --pad-xsmall: 0.1em;
+  --pad-small: 0.2em;
+  --pad-med: 0.5em;
+  --pad-large: 1em;
+  --pad-xlarge: 2em;
+}
+
+/* World's simplest reset.css (this is really all you need IMO) :) */
+* {
+  background: transparent;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Map should take up the entire page. */
+body #root .map {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary);
+  color: white;
+}
+
+/* TODO: Add other header sizes. */
+h4 {
+  font-size: min(2vmin, 11px);
+}
+
+a {
+  background-color: var(--secondary);
+  width: max(5vw, 28.5);
+  height: max(5vh, 28.5);
+  text-align: center;
+}
+
+.popup-input {
+  background-color: var(--tertiary);
+  border-width: 0;
+  border-bottom: var(--size-xsmall);
+  border-style: solid;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.marker-wrapper {
+  text-align: center;
+  background-color: var(--secondary);
+  border-radius: var(--size-med);
+  padding: var(--pad-small);
+}
+
+.marker-wrapper:hover {
+  background-color: var(--hover);
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.marker-active {
+  background-color: var(--accent);
+}
+
+.delete-marker-button {
+  background-color: var(--accent);
+  border: var(--size-xsmall) solid var(--primary);
+  color: maroon;
+  font-weight: bold;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.delete-marker-button:hover {
+  background-color: var(--hover);
+  color: red;
+}
+
+.sidebar {
+  position: absolute;
+  left: -120px;
+  top: 1.1in;
+  z-index: 100;
+
+  padding: var(--pad-med);
+  transition: left 0.2s ease-in-out;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.icon-selector-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad-small);
+}
+
+.icon-image {
+  width: 80%;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 0.8in;
+  left: 0;
+  z-index: 100;
+
+  width: var(--size-xlarge);
+  height: var(--size-xlarge);
+  margin: var(--pad-med);
+
+  border-radius: var(--size-med);
+  background-color: var(--secondary);
+  font-weight: bold;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--hover);
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.instructions {
+  margin-left: 15%;
+  text-align: left;
+  background-color: var(--primary);
+}
