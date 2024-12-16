@@ -4,11 +4,12 @@ import { upsertMarker, deleteMarker } from './DatabaseHandler';
 import Button from 'react-bootstrap/Button';
 import { createIcon } from './MapIcon';
 
-
+// Create and return a Marker object for adding markers to the map viz.
 function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLevel}) {
     const [description, setDescription] = useState(null)
     const markerRef = useRef()
 
+    // Keyboard shortcuts for closing this marker's pop-up window.
     useEffect(() => {
         const keydownListener = (e) => {
             if (!["Enter", "NumpadEnter", "Escape"].includes(e.code)) return
@@ -23,12 +24,14 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
         return () => document.removeEventListener("keydown", keydownListener);
     }, [setNewMarker])
 
+    // Open a pop-up window containing details about this marker.
     const openPopup = () => {
         if (newMarker && newMarker.id === marker.id && markerRef.current) { 
             markerRef.current.openPopup()
         }
     }
 
+    // Create and return the Marker object.
     return (
         <Marker
             key={`marker-${marker.id}`}
@@ -41,6 +44,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
             }}
             icon={createIcon(marker.icon, zoomLevel)}
         >
+	    // Marker delete button
             <Popup className="marker-popup"> 
                 <Button 
                     className='delete-marker-button'
@@ -53,6 +57,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
                     DELETE
                 </Button>
                 <br/> <br/>
+	        // Marker name input text field.
                 <input
                     className = "popup-input"
                     id={`form - ${marker.id}`}
@@ -69,6 +74,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
     )
 }
 
+// Public interface to create and return a DrawableMarker object, for the map viz.
 export function DrawableMarkers({markers, setMarkers, newMarker, setNewMarker, zoomLevel}) {
     const removeMarker = (marker) => setMarkers(markers.filter((m) => m.id !== marker.id))
     

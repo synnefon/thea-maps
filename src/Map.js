@@ -11,7 +11,7 @@ import { DrawableMarkers } from './DrawableMarker';
 import './styles.css';
 import './leaflet.css';
 
-
+// Marker which can be placed on a map.
 class MapMarker {
     constructor(id, position, description, icon) {
         this.id = id
@@ -21,7 +21,9 @@ class MapMarker {
     }
 }
 
+// Create a generic Map object.
 export function Map() {
+
     const [sidebarOpen, setSideBarOpen] = useState(true);
     const handleViewSidebar = () => setSideBarOpen(!sidebarOpen)
     const [markers, setMarkers] = useState([])
@@ -29,11 +31,13 @@ export function Map() {
     const [activeIcon, setActiveIcon] = useState(null)
     const [zoomLevel, setZoomLevel] = useState(isMobile ? 1 : 3);
 
+    // Create an object which defined the bounds of a Leaflet map.
     const mapBounds = Leaflet.latLngBounds(
         Leaflet.latLng(52, -180), // Southwest coordinates
-        Leaflet.latLng(86, 0) // Northeast coordinates
+        Leaflet.latLng(86, 0)     // Northeast coordinates
     )
 
+    // Function which creates location markers to be rendered on the map.
     const LocationMarkers = () => {
         return (
             <DrawableMarkers
@@ -46,14 +50,17 @@ export function Map() {
         )
     }
 
+    // Function to request data for each placed marker (icon, description, etc.).
     const loadMarkersData = async () => {
         fetchMarkers().then((markersData) => {
             setMarkers(markersData.Items.map((entry) => new MapMarker(entry.id, entry.position, entry.description, entry.icon)))
         })
     }
 
+    // Load marker data when a Map object is added to the DOM.
     useEffect(() => { loadMarkersData() }, [])
 
+    // Define a function that creates and returns  a new MapMarker object.
     const createMarker = (latlng) => {
         if (!activeIcon) return
 
@@ -63,6 +70,7 @@ export function Map() {
         setNewMarker(m)
     }
 
+    // On mouse double-clicks, create a marker at the clicked location on the map.
     const RegisterMapEvents = () => {
         const mapEvents = useMapEvents({
              dblclick(e) { createMarker(e.latlng) },
@@ -70,6 +78,7 @@ export function Map() {
         })
     }
 
+    // Create, populate, and return the map and it's related systems.
     return (
        <div className='map'>
            <MapContainer

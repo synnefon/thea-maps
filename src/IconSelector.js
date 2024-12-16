@@ -14,6 +14,9 @@ const choosableIcons = [
     [Icons.PERSON, "NPC"],
 ]
 
+// Create and return a button object as a table row containing a Button object within a table data.
+// TODO: Table rows are crazy.  Don't use those.  Surprisingly, I really enjoy HTML/CSS programming;
+// this styling might just be my first action item.
 function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSelectedIcon) {
     return (
        <div
@@ -37,6 +40,7 @@ function MakeButton(icon, description, handleSelectedIcon, selectedIcon, setSele
     )
 }
 
+// Public interface for creating an IconSelector menu.
 export function IconSelector({handleSelectedIcon}) {
     const [selectedIcon, setSelectedIcon] = useState(Icons.RED)
     return (
