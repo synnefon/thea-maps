@@ -44,7 +44,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
             }}
             icon={createIcon(marker.icon, zoomLevel)}
         >
-	    // Marker delete button
+	    {/* Marker delete button */}
             <Popup className="marker-popup"> 
                 <Button 
                     className='delete-marker-button'
@@ -57,7 +57,7 @@ function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLeve
                     DELETE
                 </Button>
                 <br/> <br/>
-	        // Marker name input text field.
+	        {/* Marker name input text field. */}
                 <input
                     className = "popup-input"
                     id={`form - ${marker.id}`}
