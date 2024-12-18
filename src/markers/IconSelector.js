@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { Icons, getIconSvg } from './MapIcon';
+import { Icons, getIconSvg } from './MarkerIcon';
 
-import './styles.css';
+import '../styles/app.css';
 
 const choosableIcons = [
     [Icons.FARMERS, "Farmers"],

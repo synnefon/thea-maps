@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Marker, Popup } from 'react-leaflet';
-import { upsertMarker, deleteMarker } from './DatabaseHandler';
+import { upsertMarker, deleteMarker } from '../db/DatabaseHandler';
 import Button from 'react-bootstrap/Button';
-import { createIcon } from './MapIcon';
+import { createIcon } from './MarkerIcon';
 
 // Create and return a Marker object for adding markers to the map viz.
 function DrawableMarker({marker, removeMarker, newMarker, setNewMarker, zoomLevel}) {

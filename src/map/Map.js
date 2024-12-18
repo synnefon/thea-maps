@@ -4,12 +4,12 @@ import { v4 as uuidv4 } from 'uuid';
 import Leaflet from 'leaflet'
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 
-import { upsertMarker, fetchMarkers } from './DatabaseHandler';
+import { upsertMarker, fetchMarkers } from '../db/DatabaseHandler';
 import { SideBar } from './SideBar'
-import { DrawableMarkers } from './DrawableMarker';
+import { DrawableMarkers } from '../markers/DrawableMarker';
 
-import './styles.css';
-import './leaflet.css';
+import '../styles/app.css';
+import '../styles/leaflet.css';
 
 // Marker which can be placed on a map.
 class MapMarker {
@@ -94,16 +94,16 @@ export function Map() {
                <RegisterMapEvents/>
                <TileLayer 
                    className='tile-layer'
-                   url={'../althea/{z}/{x}/{y}.png'}
+                   url={'../mapTiles/{z}/{x}/{y}.png'}
                />
                <LocationMarkers/>
-               <h2>
+               {/* <h2>
                    <br/>
                    <ol className='instructions'>
                        <li>select marker</li>
                        <li>double-click map</li>
                    </ol>
-               </h2>
+               </h2> */}
            </MapContainer>
            <SideBar 
                isOpen={sidebarOpen} 

@@ -1,4 +1,4 @@
-import { IconSelector } from "./IconSelector";
+import { IconSelector } from "../markers/IconSelector";
 
 // Sidebar object that overlays on the map.
 export function SideBar({isOpen, toggleSidebar, setActiveIcon}) {

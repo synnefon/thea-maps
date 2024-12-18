@@ -1,4 +1,5 @@
 :root {
+  --background: #201610;
   --primary: #111111;
   --secondary: #858d9c; 
   --tertiary: #bcc5da;
@@ -36,7 +37,7 @@
 body #root .map {
   width: 100vw;
   height: 100vh;
-  background-color: var(--primary);
+  background-color: white;
   color: white;
 }
 
@@ -135,10 +136,11 @@ a {
   background-color: var(--hover);
   transition-duration: 0.4s;
   cursor: pointer;
+  color: white;
 }
 
 .instructions {
   margin-left: 15%;
   text-align: left;
-  background-color: var(--primary);
+  background-color: var(--background);
 }

@@ -1,4 +1,4 @@
-import { Map } from './Map'
+import { Map } from './map/Map'
 
 // App root.
 export default function App() {
