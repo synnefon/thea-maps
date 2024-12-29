@@ -1,35 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import { v4 as uuidv4 } from 'uuid';
 import Leaflet from 'leaflet'
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
-
-import { upsertMarker, fetchMarkers } from '../db/DatabaseHandler';
+import { fetchMarkers, deleteMarkerSubscription, updateMarkerSubscription, createMarkerSubscription } from '../db/DatabaseHandler';
 import { SideBar } from './SideBar'
-import { DrawableMarkers } from '../markers/DrawableMarker';
+import { DrawableMarkers } from '../markers/DrawableMarkers';
 
 import '../styles/app.css';
 import '../styles/leaflet.css';
 
 // Marker which can be placed on a map.
 class MapMarker {
-    constructor(id, position, description, icon) {
+    constructor(id, position, description, icon, isNew=false) {
         this.id = id
         this.position = position
         this.description = description
         this.icon = icon
+        this.isNew = isNew
     }
 }
 
 // Create a generic Map object.
 export function Map() {
-
     const [sidebarOpen, setSideBarOpen] = useState(true);
     const handleViewSidebar = () => setSideBarOpen(!sidebarOpen)
     const [markers, setMarkers] = useState([])
-    const [newMarker, setNewMarker] = useState(null)
     const [activeIcon, setActiveIcon] = useState(null)
     const [zoomLevel, setZoomLevel] = useState(isMobile ? 1 : 3);
+    const mapRef = useRef();
+
+    useEffect(() => {
+        const loadCreationChanges = (rawData) => {
+            const data = rawData.onCreateAltheaMapTokenData
+            const marker = new MapMarker(data.id, JSON.parse(data.position), data.description, data.icon)
+            if (markers.map((m) => m.id).includes(marker.id)) return
+            loadMarkersData()
+        }
+
+        const createSub = createMarkerSubscription(loadCreationChanges);
+        const updateSub = updateMarkerSubscription(loadMarkersData);
+        const deleteSub = deleteMarkerSubscription(loadMarkersData);
+        return () => {
+            createSub.unsubscribe();
+            updateSub.unsubscribe();
+            deleteSub.unsubscribe();
+        }
+    }, [markers]);
 
     // Create an object which defined the bounds of a Leaflet map.
     const mapBounds = Leaflet.latLngBounds(
@@ -42,18 +59,25 @@ export function Map() {
         return (
             <DrawableMarkers
                 markers={markers}
-                setMarkers={setMarkers}
-                newMarker={newMarker}
-                setNewMarker={setNewMarker}
+                removeMarker={removeMarker}
+                updateMarker={updateMarker}
                 zoomLevel={zoomLevel}
             />
         )
     }
 
+    const removeMarker = (marker) => setMarkers(markers.filter((m) => m.id !== marker.id))
+    const updateMarker = (marker) => {
+        const idx = markers.findIndex(m => m.id === marker.id)
+        markers[idx] = marker
+        setMarkers(markers)
+    }
+
     // Function to request data for each placed marker (icon, description, etc.).
     const loadMarkersData = async () => {
         fetchMarkers().then((markersData) => {
-            setMarkers(markersData.Items.map((entry) => new MapMarker(entry.id, entry.position, entry.description, entry.icon)))
+            const items = markersData.data.listAltheaMapTokenData.items
+            setMarkers(items.map((entry) => new MapMarker(entry.id, JSON.parse(entry.position), entry.description, entry.icon)))
         })
     }
 
@@ -61,55 +85,49 @@ export function Map() {
     useEffect(() => { loadMarkersData() }, [])
 
     // Define a function that creates and returns  a new MapMarker object.
-    const createMarker = (latlng) => {
+    const createMarker = (latLng) => {
         if (!activeIcon) return
-
-        const m = new MapMarker(uuidv4(), [latlng.lat, latlng.lng], "", activeIcon)
+        const m = new MapMarker(uuidv4(), latLng, "", activeIcon, true)
         setMarkers(markers.concat([m]))
-        upsertMarker(m)
-        setNewMarker(m)
     }
 
     // On mouse double-clicks, create a marker at the clicked location on the map.
     const RegisterMapEvents = () => {
         const mapEvents = useMapEvents({
-             dblclick(e) { createMarker(e.latlng) },
-             zoomend() {setZoomLevel(mapEvents.getZoom());},
+            zoomend: () => setZoomLevel(mapEvents.getZoom()),
+            dblclick(e) { createMarker(e.latlng) },
         })
     }
 
     // Create, populate, and return the map and it's related systems.
     return (
-       <div className='map'>
-           <MapContainer
-               center={[0, 0]} 
-               zoom={zoomLevel}
-               minZoom={isMobile ? 1 : 3}
-               maxZoom={isMobile ? 5 : 6}
-               doubleClickZoom={false}
-               autoPanOnFocus={false}
-               maxBounds={mapBounds}
-               maxBoundsViscosity={1}
-           >
-               <RegisterMapEvents/>
-               <TileLayer 
-                   className='tile-layer'
-                   url={'../mapTiles/{z}/{x}/{y}.png'}
-               />
-               <LocationMarkers/>
-               {/* <h2>
-                   <br/>
-                   <ol className='instructions'>
-                       <li>select marker</li>
-                       <li>double-click map</li>
-                   </ol>
-               </h2> */}
-           </MapContainer>
-           <SideBar 
-               isOpen={sidebarOpen} 
-               toggleSidebar={handleViewSidebar}
-               setActiveIcon={setActiveIcon}
-           />
-	</div>
+       <div 
+            className='map'
+        >
+            <MapContainer
+                ref={mapRef}
+                center={[0, 0]} 
+                zoom={zoomLevel}
+                minZoom={isMobile ? 1 : 3}
+                maxZoom={isMobile ? 5 : 6}
+                doubleClickZoom={false}
+                autoPanOnFocus={false}
+                maxBounds={mapBounds}
+                maxBoundsViscosity={1}
+                bubblingMouseEvents={false}
+            >
+                <RegisterMapEvents/>
+                <TileLayer 
+                    className='tile-layer'
+                    url={'../mapTiles/{z}/{x}/{y}.png'}
+                />
+                <LocationMarkers/>
+            </MapContainer>
+            <SideBar 
+                isOpen={sidebarOpen} 
+                toggleSidebar={handleViewSidebar}
+                setActiveIcon={setActiveIcon}
+            />
+	    </div>
     ); 
 }
