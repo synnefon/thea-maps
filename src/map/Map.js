@@ -5,7 +5,7 @@ import Leaflet from 'leaflet'
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import { fetchMarkers, deleteMarkerSubscription, updateMarkerSubscription, createMarkerSubscription } from '../db/DatabaseHandler';
 import { SideBar } from './SideBar'
-import { DrawableMarkers } from '../markers/DrawableMarkers';
+import { DrawableMarkers } from './markers/DrawableMarkers';
 
 import '../styles/app.css';
 import '../styles/leaflet.css';
@@ -48,12 +48,6 @@ export function Map() {
         }
     }, [markers]);
 
-    // Create an object which defined the bounds of a Leaflet map.
-    const mapBounds = Leaflet.latLngBounds(
-        Leaflet.latLng(52, -180), // Southwest coordinates
-        Leaflet.latLng(86, 0)     // Northeast coordinates
-    )
-
     // Function which creates location markers to be rendered on the map.
     const LocationMarkers = () => {
         return (
@@ -93,11 +87,23 @@ export function Map() {
 
     // On mouse double-clicks, create a marker at the clicked location on the map.
     const RegisterMapEvents = () => {
-        const mapEvents = useMapEvents({
-            zoomend: () => setZoomLevel(mapEvents.getZoom()),
+        const map = useMapEvents({
+            zoomend: () => setZoomLevel(map.getZoom()),
             dblclick(e) { createMarker(e.latlng) },
+            // zoom: () => updateBounds(),
+            // move: () => updateBounds()
         })
+
+        // Update CRS to prevent tiling
+        Leaflet.CRS.EPSG3857.wrapLng = undefined;
+        Leaflet.CRS.EPSG3857.wrapLat = undefined;
     }
+
+     // Create an object which defined the bounds of a Leaflet map.
+    //  const mapBounds = Leaflet.latLngBounds(
+    //     Leaflet.latLng([0, -200]), // Southwest
+    //     Leaflet.latLng(200, 400)     // Northeast
+    // )
 
     // Create, populate, and return the map and it's related systems.
     return (
@@ -106,13 +112,13 @@ export function Map() {
         >
             <MapContainer
                 ref={mapRef}
-                center={[0, 0]} 
+                center={[75, -85]} 
                 zoom={zoomLevel}
                 minZoom={isMobile ? 1 : 3}
                 maxZoom={isMobile ? 5 : 6}
                 doubleClickZoom={false}
                 autoPanOnFocus={false}
-                maxBounds={mapBounds}
+                // maxBounds={mapBounds}
                 maxBoundsViscosity={1}
                 bubblingMouseEvents={false}
             >

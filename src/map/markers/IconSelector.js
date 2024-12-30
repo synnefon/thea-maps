@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Icons, getIconSvg } from './MarkerIcon';
 
-import '../styles/app.css';
+import '../../styles/app.css';
 
 const choosableIcons = [
     [Icons.FARMERS, "Farmers"],

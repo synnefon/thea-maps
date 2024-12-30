@@ -4,7 +4,9 @@
   --secondary: #858d9c; 
   --tertiary: #bcc5da;
   --accent: #6082bd;
+  --text: var(--primary);
   --hover: #282c34;
+  --hover-text: white;
 
   /* Sizing & borders. */
   --size-xsmall: 0.1em;
@@ -24,7 +26,7 @@
 
 /* World's simplest reset.css (this is really all you need IMO) :) */
 * {
-  background: transparent;
+  /* background: transparent; */
   box-sizing: border-box;
   width: auto;
   height: auto;
@@ -65,8 +67,24 @@ a {
 .marker-wrapper {
   text-align: center;
   background-color: var(--secondary);
-  border-radius: var(--size-med);
-  padding: var(--pad-small);
+  border-left: 2px solid black; 
+  border-right: 2px solid black; 
+  padding-left: var(--pad-small);
+  padding-right: var(--pad-small);
+  padding-top: var(--pad-small);
+  padding-bottom: var(--pad-small);
+}
+
+.marker-wrapper:first-child { 
+  border-top: 2px solid black;
+  border-top-left-radius: var(--size-med);
+  border-top-right-radius: var(--size-med);
+}
+
+.marker-wrapper:last-child { 
+  border-bottom: 2px solid black;
+  border-bottom-left-radius: var(--size-med);
+  border-bottom-right-radius: var(--size-med);
 }
 
 .marker-wrapper:hover {
@@ -86,6 +104,8 @@ a {
   font-weight: bold;
   transition-duration: 0.4s;
   cursor: pointer;
+  width: 56px;
+  text-align: center;
 }
 
 .delete-marker-button:hover {
@@ -93,34 +113,43 @@ a {
   color: red;
 }
 
-.sidebar {
+.map-sidebar {
   position: absolute;
-  left: -120px;
-  top: 1.1in;
+  right: -120px;
+  top: 2in;
   z-index: 100;
 
   padding: var(--pad-med);
-  transition: left 0.2s ease-in-out;
+  transition: right 0.2s ease-in-out;
 }
 
-.sidebar.open {
-  left: 0;
+.map-sidebar.open {
+  right: 0;
 }
 
 .icon-selector-table {
   display: flex;
   flex-direction: column;
-  gap: var(--pad-small);
+  gap: var(--pad-xsmall);
+  background-color: var(--primary);
+  border: 1px transparent;
+  border-radius: var(--size-med);
 }
 
 .icon-image {
   width: 80%;
 }
 
+.thea-campaign-doc {
+  width: 100%!important;
+  height: 100em!important;
+  padding-top: 4.2em!important;
+}
+
 .sidebar-toggle {
   position: absolute;
-  top: 0.8in;
-  left: 0;
+  top: 1.6in;
+  right: 0;
   z-index: 100;
 
   width: var(--size-xlarge);
@@ -128,6 +157,7 @@ a {
   margin: var(--pad-med);
 
   border-radius: var(--size-med);
+  border: 2px solid black;
   background-color: var(--secondary);
   font-weight: bold;
 }

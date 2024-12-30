@@ -1,7 +1,6 @@
     import React, { useState, useRef, useEffect } from 'react';
     import { Marker, Popup } from 'react-leaflet';
-    import { createMarkerDB, updateMarkerDB, deleteMarkerDB } from '../db/DatabaseHandler';
-    import Button from 'react-bootstrap/Button';
+    import { createMarkerDB, updateMarkerDB, deleteMarkerDB } from '../../db/DatabaseHandler';
     import { createIcon } from './MarkerIcon';
     
     // Create and return a Marker object for adding markers to the map viz.
@@ -61,7 +60,7 @@
                     className="marker-popup"
                     bubblingMouseEvents={true}
                 > 
-                    <Button 
+                    <div
                         className='delete-marker-button'
                         onClick={(e) => {
                             removeMarker(marker)
@@ -70,7 +69,7 @@
                         }}
                     >
                         DELETE
-                    </Button>
+                    </div>
                     <br/> <br/>
                 {/* Marker name input text field. */}
                     <input

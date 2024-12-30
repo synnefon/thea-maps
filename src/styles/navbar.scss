@@ -1,0 +1,33 @@
+@import "../../node_modules/@coreui/coreui/scss/functions";
+@import "./app.css";
+
+.navbar-nav {
+  --bs-nav-link-hover-color: yellow;
+  --bs-nav-link-color: blue;
+  --bs-navbar-active-color: rgb(99, 99, 248);
+}
+
+.bg-body-tertiary {
+  background-color: var(--secondary)!important;
+}
+
+.dropdown-item {
+  --bs-dropdown-link-color: blue!important;
+}
+
+.dropdown-menu {
+  background-color: var(--secondary)!important;
+  :hover {
+    background-color: var(--secondary)!important;
+    color: yellow;
+  }
+}
+
+@import "../../node_modules/@coreui/coreui/scss/variables";
+@import "../../node_modules/@coreui/coreui/scss/maps";
+@import "../../node_modules/@coreui/coreui/scss/mixins";
+@import "../../node_modules/@coreui/coreui/scss/root";
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+

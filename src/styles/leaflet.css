@@ -1,19 +1,45 @@
-.leaflet-control-container .leaflet-top .leaflet-control-zoom { 
-  :hover {
-    background-color: var(--hover);
-    color: white;
-  }
+.leaflet-control-container {
+  top: 0.8in;
+  position: absolute;
+}
 
-  *.leaflet-disabled {
-    background-color: var(--tertiary);
-    color: var(--secondary);
-    span {
-      background-color: var(--tertiary);
-    }
-    :hover {
-      color: var(--secondary);
-    }
-  }
+/* zoom in */
+.leaflet-control-zoom-in {
+  background-color: var(--secondary)!important;
+  border: 2px solid black;
+  border-bottom: none;
+}
+
+.leaflet-control-zoom-in:hover {
+  background-color: var(--hover)!important;
+  color: var(--hover-text);
+}
+
+
+/* zoom out */
+.leaflet-control-zoom-out {
+  background-color: var(--secondary)!important;
+  border: 2px solid black;
+  border-bottom: 2px solid black!important;
+}
+
+.leaflet-control-zoom-out:hover {
+  background-color: var(--hover)!important;
+  color: var(--hover-text);
+}
+
+/* general zoom controls */
+.leaflet-disabled:hover {
+  background-color: var(--secondary)!important;
+  color: var(--hover-text);
+}
+
+.leaflet-touch .leaflet-bar {
+  border-style: none;
+}
+
+.leaflet-bar a {
+  border-bottom: none;
 }
 
 .leaflet-pane.leaflet-marker-pane img:hover {
