@@ -1,5 +1,5 @@
 # View the Site
-[https://thea-map.netlify.app](http://3.142.137.98:3000/althea)
+http://3.142.137.98:3000
 
 # Running Locally
 ### `npm start`
