@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/synnefon/thea-maps/static/css/main.4e0a2724.css",
+    "main.js": "/synnefon/thea-maps/static/js/main.f937cea6.js",
+    "static/js/453.29f0d01f.chunk.js": "/synnefon/thea-maps/static/js/453.29f0d01f.chunk.js",
+    "static/media/money-bag.svg": "/synnefon/thea-maps/static/media/money-bag.cc7d4d99d05658b8024f27e1427dacfc.svg",
+    "static/media/farmers.svg": "/synnefon/thea-maps/static/media/farmers.6d0b20805f984481cb752238d521e8d4.svg",
+    "static/media/church.svg": "/synnefon/thea-maps/static/media/church.f69f52ac5c4f32bcb7dc4770554bf955.svg",
+    "static/media/merchants.svg": "/synnefon/thea-maps/static/media/merchants.c02e259fab2214534df1fc5c4084002b.svg",
+    "static/media/thieves.svg": "/synnefon/thea-maps/static/media/thieves.5c376f03e5dab3c53697375d3c4eafc5.svg",
+    "static/media/house.svg": "/synnefon/thea-maps/static/media/house.e3227ac746dad379e4727d49182089b3.svg",
+    "static/media/person-half.svg": "/synnefon/thea-maps/static/media/person-half.fe6e6dd0f15406dfb5c5c55afcf02d91.svg",
+    "static/media/red-marker.svg": "/synnefon/thea-maps/static/media/red-marker.4c0002e765b8768267aa2abdc49fead0.svg",
+    "static/media/alert.svg": "/synnefon/thea-maps/static/media/alert.46099dd255a0a1f883483a7f933e8f4a.svg",
+    "index.html": "/synnefon/thea-maps/index.html",
+    "main.4e0a2724.css.map": "/synnefon/thea-maps/static/css/main.4e0a2724.css.map",
+    "main.f937cea6.js.map": "/synnefon/thea-maps/static/js/main.f937cea6.js.map",
+    "453.29f0d01f.chunk.js.map": "/synnefon/thea-maps/static/js/453.29f0d01f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4e0a2724.css",
+    "static/js/main.f937cea6.js"
+  ]
+}

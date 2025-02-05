@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg 
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg" 
+>
+    <g class="layer">
+        <title>Layer 1</title>
+        <ellipse 
+            cx="12"
+            cy="13.27"
+            fill="#1A1A19"
+            rx="3"
+            ry="6"
+        />
+        <path 
+            fill="#FC4100"
+            id="alert"
+            clip-rule="evenodd" 
+            d="m11,13c0,0.55 0.45,1 1,1c0.55,0 1,-0.45 1,-1l0,-3c0,-0.55 -0.45,-1 -1,-1c-0.55,0 -1,0.45 -1,1l0,3zm2,2.99c0,-0.55 -0.45,-1 -1,-1c-0.55,0 -1,0.45 -1,1l0,0.01c0,0.55 0.45,1 1,1c0.55,0 1,-0.45 1,-1l0,-0.01zm-3.62,-11.33c1.14,-2.06 4.1,-2.06 5.24,0l6.6,11.88c1.11,2 -0.33,4.46 -2.62,4.46l-13.2,0c-2.29,0 -3.73,-2.46 -2.62,-4.46l6.6,-11.88z"
+            fill-rule="evenodd"
+        />
+    </g>
+</svg>
